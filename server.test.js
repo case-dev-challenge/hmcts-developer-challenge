@@ -2,7 +2,6 @@ const request = require('supertest');
 const { app, cases } = require('./server');
 
 describe('HMCTS Case Management API', () => {
-    // Her test öncesi cases array'ini temizle
     beforeEach(() => {
         cases.length = 0;
     });
@@ -90,7 +89,6 @@ describe('HMCTS Case Management API', () => {
         });
 
         test('should return array of all cases', async () => {
-            // Test verilerini hazırla
             const testCases = [
                 {
                     id: 'test-id-1',
@@ -187,9 +185,9 @@ describe('HMCTS Case Management API', () => {
             expect(response.body.status).toBe(updateData.status);
             expect(response.body.priority).toBe(updateData.priority);
             expect(response.body.assignedTo).toBe(updateData.assignedTo);
-            expect(response.body.description).toBe(originalCase.description); // Değişmemiş
-            expect(response.body.createdAt).toBe(originalCase.createdAt); // Değişmemiş
-            expect(response.body.updatedAt).not.toBe(originalCase.updatedAt); // Güncellenmiş
+            expect(response.body.description).toBe(originalCase.description);
+            expect(response.body.createdAt).toBe(originalCase.createdAt);
+            expect(response.body.updatedAt).not.toBe(originalCase.updatedAt);
         });
 
         test('should return 404 when updating non-existent case', async () => {

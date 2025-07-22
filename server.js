@@ -6,18 +6,13 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-// In-memory storage for cases
 let cases = [];
 
-// Export for testing
 module.exports = { app, cases };
-
-// Routes
 app.get('/cases', (req, res) => {
     res.json(cases);
 });
@@ -90,12 +85,9 @@ app.delete('/cases/:id', (req, res) => {
     res.status(204).send();
 });
 
-// Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
-
-// Start server
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
